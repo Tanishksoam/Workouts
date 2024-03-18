@@ -1,20 +1,45 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import exercises from "../../assets/data/exercises.json";
+import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
 import ExerciseListItem from "../components/ExerciseListItem";
+import { useQuery } from "@tanstack/react-query";
+import { ActivityIndicator } from "react-native-web";
+import { gql } from "graphql-request";
+import Client from "../grapghqlClient";
 
-export default function App() {
+const exerciseQuery = gql`
+  query exercises($muscle: String, $name: String) {
+    exercises(muscle: $muscle, name: $name) {
+      name
+      muscle
+    }
+  }
+`;
+
+export default function ExerciseScreen() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["exercises"],
+    queryFn: async () => {
+      return Client.request(exerciseQuery);
+    },
+  });
+  console.log(data);
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+  if (error) {
+    return <Text>{error}</Text>;
+  }
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text>Tanishk Soam is a millionaire by 2026</Text>
       <FlatList
-        data={exercises}
+        data={data?.exercises}
         keyExtractor={(item, index) => item.name + index}
         renderItem={({ item }) => <ExerciseListItem item={item} />}
       />
 
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 

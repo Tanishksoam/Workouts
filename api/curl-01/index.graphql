@@ -1,25 +1,25 @@
-type InsertSet {
-  insertedId: String
-}
+# type InsertSet {
+#   insertedId: String
+# }
 
-scalar InputDocument
+# scalar InputDocument
 
-type Mutation {
-  myQuery(
-    collection: String
-    dataSource: String
-    database: String
-    document: InputDocument
-  ): InsertSet
-    @rest(
-      method: POST
-      endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/insertOne"
-      headers: [
-        { name: "accept", value: "application/json" }
-        {
-          name: "apikey"
-          value: "ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS"
-        }
-      ]
-    )
-}
+# type Mutation {
+#   myQuery(
+#     collection: String
+#     dataSource: String
+#     database: String
+#     document: InputDocument
+#   ): InsertSet
+#     @rest(
+#       method: POST
+#       endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/insertOne"
+#       headers: [
+#         { name: "accept", value: "application/json" }
+#         {
+#           name: "apikey"
+#           value: "ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS"
+#         }
+#       ]
+#     )
+# }

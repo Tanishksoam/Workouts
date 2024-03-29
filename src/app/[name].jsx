@@ -33,7 +33,7 @@ export default function ExerciseDetails({}) {
     queryKey: ["exercises", name],
     queryFn: () => graphqlClient.request(exerciseQuery, { name: name }),
   });
-  
+
   const [instructions, setInstructions] = useState(false);
 
   if (isLoading) {
@@ -73,7 +73,7 @@ export default function ExerciseDetails({}) {
         </Text>
       </View>
 
-      <NewSetInput />
+      <NewSetInput name = {name}/>
       <SetLists name = {name} data = {data}/>
     </ScrollView>
   );

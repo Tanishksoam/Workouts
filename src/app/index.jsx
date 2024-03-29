@@ -28,7 +28,7 @@ export default function ExerciseScreen() {
     queryKey: ["exercises"],
     queryFn: () => Client.request(exerciseQuery),
   });
-  console.log(data);
+  console.log("data in home ",data);
   if (isLoading) {
     return <ActivityIndicator />;
   }

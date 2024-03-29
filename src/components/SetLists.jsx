@@ -12,6 +12,11 @@ const find = (name, setDataArray)=>{
   }
   return finalSetDisplay;
 }
+const setData = (data,name) => {
+  const setDataArray = data.sets.documents;
+  return find(name, setDataArray);
+  console.log(finalSetDisplay);
+};
 
 
 const exerciseQuery = gql`
@@ -40,9 +45,8 @@ const SetLists = ({name}) => {
     return <ActivityIndicator />;
   }
   else{
-    const setDataArray = data.sets.documents;
-    finalSetDisplay = find(name, setDataArray);
-    console.log(finalSetDisplay)
+    
+    finalSetDisplay =  setData(data,name);
   }
   if (error) {
     return <Text>Error</Text>;
@@ -65,5 +69,5 @@ const SetLists = ({name}) => {
     />
   );
 };
-
+export {setData}
 export default SetLists;

@@ -1,2 +1,70 @@
 stepzen import curl https://api.api-ninjas.com/v1/exercises\?muscle\=chest \
  -H "X-API-KEY: 8VdV6Drt+2ZZx1CQTngPhA==ZqFYXwGZzyVfXuzy"
+
+soamtanishk
+jG6BHqYpQqr2PZEt
+
+mongodb+srv://soamtanishk:<password>@cluster0.daq3ou7.mongodb.net/
+
+sPpuxY414Xvv6pCyY3Vy9eJ8yonKKx4RT6DlFy3KyzhuHnlr4z5gtawNDujwvpmK
+
+curl --location --request POST 'https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/findOne' \
+--header 'Content-Type: application/json' \
+--header 'Access-Control-Request-Headers: *' \
+--header 'api-key: sPpuxY414Xvv6pCyY3Vy9eJ8yonKKx4RT6DlFy3KyzhuHnlr4z5gtawNDujwvpmK' \
+--data-raw '{
+    "collection":"<COLLECTION_NAME>",
+    "database":"<DATABASE_NAME>",
+    "dataSource":"Cluster0",
+    "projection": {"_id": 1}
+}'
+
+https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1
+
+
+stepzen
+
+ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS
+
+stepzen import curl  --request POST 'https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/find' \
+--header 'Content-Type: application/json' \
+--header 'Access-Control-Request-Headers: *' \
+--header 'api-key: ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS' \
+--data-raw '{
+    "collection":"sets",
+    "database":"workouts",
+    "dataSource":"Cluster0"
+}'
+
+curl "https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS" \
+  -H 'Content-Type: application/json' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "push",
+      "weights": 4,
+      "reps": 10
+    }
+  }'
+
+curl "https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS" \
+  -H 'Content-Type: application/json' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "push",
+      "weights": 4,
+      "reps": 10
+    }
+  }'
+

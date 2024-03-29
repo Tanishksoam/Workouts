@@ -1,0 +1,32 @@
+type DocumentsEntry {
+  _id: String
+  exercise: String
+  reps: Int
+  weights: Float
+}
+
+type Root {
+  documents: [DocumentsEntry]
+}
+
+type Query {
+  sets: Root
+    @rest(
+      method: POST
+      endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-vsoyg/endpoint/data/v1/action/find"
+      headers: [
+        { name: "access-control-request-headers", value: "*" }
+        {
+          name: "api-key"
+          value: "ENVf8L7uXWshlCL2jzt1sfS5y6SZxZoUjE82IngABIIJLtKEp3WnlTr57LRpllNS"
+        }
+      ]
+      postbody: """
+      {
+        "collection": "sets",
+        "dataSource": "Cluster0",
+        "database": "workouts"
+      }
+      """
+    )
+}

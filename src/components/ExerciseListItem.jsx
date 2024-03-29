@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
-    width: innerWidth - 10,
+    // width: innerWidth - 10,
     gap: 5,
     marginHorizontal: 3,
     marginTop: 5,

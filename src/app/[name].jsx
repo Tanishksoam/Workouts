@@ -1,21 +1,60 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import exercises from "../../assets/data/exercises.json";
+
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { gql } from "graphql-request";
+import { useQuery } from "@tanstack/react-query";
+
+import graphqlClient from "../grapghqlClient";
+import NewSetInput from "../components/NewSetInput";
+import SetLists from "../components/SetLists";
+
+const exerciseQuery = gql`
+  query exercises($name: String) {
+    exercises(name: $name) {
+      equipment
+      instructions
+      muscle
+      name
+    }
+  }
+`;
 
 export default function ExerciseDetails({}) {
-  const params = useLocalSearchParams();
+  const { name } = useLocalSearchParams();
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["exercises", name],
+    queryFn: () => graphqlClient.request(exerciseQuery, { name: name }),
+  });
+  
   const [instructions, setInstructions] = useState(false);
-  const exercise = exercises.find((exercise) => exercise.name === params.name);
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>Failed to fetch data</Text>;
+  }
+
+  const exercise = data.exercises[0];
+
   if (!exercise) {
     return <Text>Exercise not found</Text>;
   }
   return (
     <ScrollView contentContainerStyle={styles.exerciseContainer}>
-      <Stack.Screen options={{ title: `${exercise.name}` }} />
+      <Stack.Screen options={{ title: exercise.name }} />
+      <Text style={styles.PageTitle}>Exercise Details</Text>
+
       <View style={styles.panel}>
-        <Text style={styles.PageTitle}>Exercise Details</Text>
         <Text style={styles.exerciseTitle}>{exercise.name}</Text>
         <Text style={styles.exerciseSubTitle}>
           {exercise.muscle} | {exercise.equipment}
@@ -33,6 +72,9 @@ export default function ExerciseDetails({}) {
           {instructions ? "See Less" : "See More"}{" "}
         </Text>
       </View>
+
+      <NewSetInput />
+      <SetLists name = {name} data = {data}/>
     </ScrollView>
   );
 }
@@ -50,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
-    width: innerWidth - 20,
+    // width: innerWidth - 20,
     gap: 5,
     //shadow
     shadowColor: "#000",
